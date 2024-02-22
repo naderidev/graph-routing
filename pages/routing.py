@@ -18,7 +18,7 @@ class RoutingView(View):
                 icon=icons.EDIT_ROAD,
                 bgcolor=colors.YELLOW_ACCENT_700,
                 mini=True,
-                on_click=lambda e: e.page.go('/draw')
+                on_click=self._back_to_draw
             ),
             floating_action_button_location=FloatingActionButtonLocation.START_FLOAT,
             drawer=NavigationDrawer(
@@ -121,6 +121,10 @@ class RoutingView(View):
                 indicator_color=colors.WHITE,
             )
         )
+
+    def _back_to_draw(self, e):
+        self._unmark_route(self._current_marked_route)
+        e.page.go('/draw')
 
     def _build(self):
         super()._build()
