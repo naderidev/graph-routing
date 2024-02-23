@@ -129,17 +129,6 @@ class RoutingView(View):
     def _build(self):
         super()._build()
         self.controls = self.body()
-        self._origin_input.current.options = [
-            Option(
-                text=t.text,
-                key=t.data,
-            ) for t in list(
-                filter(
-                    lambda x: isinstance(x, cv.Text),
-                    self.page.graph['shapes']
-                )
-            )
-        ]
         self._destination_input.current.options = self._origin_input.current.options = [
             Option(
                 text=t.text,
@@ -244,6 +233,5 @@ class RoutingView(View):
                 destination=int(destination)
             )
             print(route)
-            # print(routing.get_all_roads())
             shapes = routing.get_route_shapes(route)
             self._mark_route(shapes)
